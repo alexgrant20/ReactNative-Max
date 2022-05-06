@@ -83,12 +83,12 @@ function GameScreen({ userNumber, onGameOver, onGuess }) {
         <View style={styles.buttonsContainer}>
           <View style={styles.buttonContainer}>
             <PrimaryButton onPress={nextGuessHandler.bind(this, 'lower')}>
-              <Ionicons name="md-remove" size={24} color="white" />
+              <Ionicons name='md-remove' size={24} color='white' />
             </PrimaryButton>
           </View>
           <View style={styles.buttonContainer}>
             <PrimaryButton onPress={nextGuessHandler.bind(this, 'greater')}>
-              <Ionicons name="md-add" size={24} color="white" />
+              <Ionicons name='md-add' size={24} color='white' />
             </PrimaryButton>
           </View>
         </View>
@@ -101,13 +101,13 @@ function GameScreen({ userNumber, onGameOver, onGuess }) {
       <View style={styles.landscapeContainer}>
         <View style={styles.buttonContainer}>
           <PrimaryButton onPress={nextGuessHandler.bind(this, 'lower')}>
-            <Ionicons name="md-remove" size={24} color="white" />
+            <Ionicons name='md-remove' size={24} color='white' />
           </PrimaryButton>
         </View>
         <NumberContainer>{currentGuess}</NumberContainer>
         <View style={styles.buttonContainer}>
           <PrimaryButton onPress={nextGuessHandler.bind(this, 'greater')}>
-            <Ionicons name="md-add" size={24} color="white" />
+            <Ionicons name='md-add' size={24} color='white' />
           </PrimaryButton>
         </View>
       </View>
