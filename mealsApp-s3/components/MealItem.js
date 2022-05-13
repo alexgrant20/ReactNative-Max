@@ -1,3 +1,4 @@
+import { useNavigation } from '@react-navigation/native';
 import {
   Image,
   Platform,
@@ -6,8 +7,24 @@ import {
   Text,
   View,
 } from 'react-native';
+import MealDetails from './MealDetails';
 
-function MealItem({ title, image, duration, complexity, affordability }) {
+function MealItem({
+  title,
+  image,
+  duration,
+  complexity,
+  affordability,
+  onPress,
+}) {
+  // Alternative navigation
+  // function onPress() {
+  //   // const navigation = useNavigation();
+  //   // navigation.navigate('MealDetail', {
+  //   //   // Data
+  //   // })
+  // }
+
   return (
     <View style={styles.outerContainer}>
       <Pressable
@@ -15,15 +32,16 @@ function MealItem({ title, image, duration, complexity, affordability }) {
           return [styles.innerContainer, pressed ? styles.click : ''];
         }}
         android_ripple={{ color: '#ccc' }}
+        onPress={onPress}
       >
         <Image source={{ uri: image }} style={styles.imageBg} />
         <View style={styles.textContainer}>
           <Text style={styles.title}>{title}</Text>
-          <View style={styles.detailContainer}>
-            <Text style={styles.detailItem}>{duration}</Text>
-            <Text style={styles.detailItem}>{complexity}</Text>
-            <Text style={styles.detailItem}>{affordability}</Text>
-          </View>
+          <MealDetails
+            affordability={affordability}
+            complexity={complexity}
+            duration={duration}
+          />
         </View>
       </Pressable>
     </View>
@@ -51,7 +69,6 @@ const styles = StyleSheet.create({
   imageBg: {
     width: '100%',
     height: 200,
-    borderTopStartRadius: 10,
   },
   textContainer: {
     alignItems: 'center',
@@ -62,13 +79,7 @@ const styles = StyleSheet.create({
     fontSize: 16,
     marginBottom: 10,
   },
-  detailContainer: {
-    flexDirection: 'row',
-  },
-  detailItem: {
-    marginRight: 5,
-    textTransform: 'uppercase',
-  },
+
   click: {
     opacity: Platform.OS === 'ios' ? 0.8 : 1,
   },
