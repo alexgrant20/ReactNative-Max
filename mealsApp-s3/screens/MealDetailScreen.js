@@ -1,4 +1,4 @@
-import { useLayoutEffect } from 'react';
+import { useContext, useLayoutEffect } from 'react';
 import {
   Button,
   Image,
@@ -11,12 +11,21 @@ import IconButton from '../components/IconButton';
 import List from '../components/MealDetail/List';
 import Subtitile from '../components/MealDetail/Subtitile';
 import MealDetails from '../components/MealDetails';
+import { FavoriteContext } from '../store/context/favorites-context';
 
 function MealDetailScreen({ navigation, route }) {
+  const favoriteMealsCtx = useContext(FavoriteContext);
+
   const mealItem = route.params.mealItem;
 
-  function headerPressBtnHandler() {
-    console.log('Krayega');
+  const mealIsFavorite = favoriteMealsCtx.ids.includes(mealItem.id);
+
+  function cangeFavoriteStatusHandler() {
+    if (mealIsFavorite) {
+      favoriteMealsCtx.removeFavorite(mealItem.id);
+    } else {
+      favoriteMealsCtx.addFavorite(mealItem.id);
+    }
   }
 
   useLayoutEffect(() => {
@@ -26,13 +35,13 @@ function MealDetailScreen({ navigation, route }) {
           <IconButton
             size={24}
             color="white"
-            icon="star"
-            onPress={headerPressBtnHandler}
+            icon={mealIsFavorite ? 'star' : 'star-outline'}
+            onPress={cangeFavoriteStatusHandler}
           />
         );
       },
     });
-  }, [navigation, headerPressBtnHandler]);
+  }, [navigation, cangeFavoriteStatusHandler]);
 
   return (
     <ScrollView style={styles.rootContainer}>
